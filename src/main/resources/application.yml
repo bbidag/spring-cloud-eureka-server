@@ -4,8 +4,13 @@ server:
 eureka:
   instance:
     hostname: localhost
+    #레지스트리에서 클라이언트로부터 마지막 하트비트를 수신하고 제거 대상이 되는데 걸리는 시간(default:90)
+    lease-expiration-duration-in-seconds: 30
   client:
     registerWithEureka: false
     fetchRegistry: false
     serviceUrl:
       defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/
+  server:
+    #네트워크 단절 등의 이유로 문제가 있어 문제의 instance를 정해진 기간동안 제거하지 않을지의 여부 (default:true)
+    enable-self-preservation: true
